@@ -6,6 +6,7 @@ version: "3.4"
 services:
   mysql:
     image: mysql:8.0
+    restart: always
     command: mysqld --default-authentication-plugin=mysql_native_password
     ports:
       - 8083:3306
@@ -19,6 +20,7 @@ services:
       - ./artifacts/db:/var/lib/mysql
   cce:
     image: cce:latest
+    restart: always
     read_only: true
     build:
       context: .
@@ -37,6 +39,7 @@ services:
       - ./artifacts/controller:/artifacts
   ui:
     image: ui:latest
+    restart: always
     read_only: true
     build:
       context: ./ui/controller
@@ -58,6 +61,7 @@ services:
       CNCA_UI_URL: "${CNCA_UI_URL}"
   cups-ui:
     image: cups:latest
+    restart: always
     read_only: true
     build:
       context: ./ui/cups
@@ -71,6 +75,7 @@ services:
       CONTROLLER_UI_URL: "${LANDING_UI_URL}"
   cnca-ui:
     image: cnca:latest
+    restart: always
     build:
       context: ./ui/cnca
       args:
